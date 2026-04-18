@@ -16,30 +16,27 @@ public class Pedido {
     public Pedido(PedidoId id, String clienteNombre) {
         this.id = Objects.requireNonNull(id);
 
-        if (clienteNombre == null || clienteNombre.isBlank()) {
-            throw new IllegalArgumentException("El cliente es obligatorio");
-        }
+        if (clienteNombre == null || clienteNombre.isBlank())
+            throw new IllegalArgumentException("Cliente obligatorio");
 
         this.clienteNombre = clienteNombre;
     }
 
     public void agregarLinea(String producto, int cantidad, Dinero precio) {
 
-        if (estado != EstadoPedido.BORRADOR) {
-            throw new IllegalStateException("Solo se pueden agregar líneas en BORRADOR");
-        }
+        if (estado != EstadoPedido.BORRADOR)
+            throw new IllegalStateException("Solo BORRADOR");
 
-        if (cantidad <= 0) {
-            throw new IllegalArgumentException("Cantidad debe ser mayor a cero");
-        }
+        if (cantidad <= 0)
+            throw new IllegalArgumentException("Cantidad inválida");
 
         lineas.add(new LineaPedido(producto, cantidad, precio));
     }
 
     public void confirmar() {
-        if (lineas.isEmpty()) {
-            throw new IllegalStateException("No se puede confirmar un pedido vacío");
-        }
+        if (lineas.isEmpty())
+            throw new IllegalStateException("Sin líneas");
+
         this.estado = EstadoPedido.CONFIRMADO;
     }
 
@@ -49,19 +46,8 @@ public class Pedido {
                 .reduce(Dinero.CERO, Dinero::sumar);
     }
 
-    public PedidoId getId() {
-        return id;
-    }
-
-    public String getClienteNombre() {
-        return clienteNombre;
-    }
-
-    public List<LineaPedido> getLineas() {
-        return lineas;
-    }
-
-    public EstadoPedido getEstado() {
-        return estado;
-    }
+    public PedidoId getId() { return id; }
+    public String getClienteNombre() { return clienteNombre; }
+    public List<LineaPedido> getLineas() { return lineas; }
+    public EstadoPedido getEstado() { return estado; }
 }
