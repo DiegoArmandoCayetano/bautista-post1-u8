@@ -90,4 +90,5 @@ Este enfoque permitió obtener un sistema modular, escalable y fácil de mantene
 
 # 👨‍💻 Autor
 
-Tu Nombre - Universidad de Santander
+Diego Armando Cayetano Bautista Cano - Universidad de Santander
+2026
